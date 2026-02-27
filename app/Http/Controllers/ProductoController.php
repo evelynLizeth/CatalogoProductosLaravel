@@ -40,8 +40,9 @@ class ProductoController extends Controller
     {
         $data = $request->validate([
             'Nombre' => 'required|string|max:255',
-            'Precio' => 'required|numeric',
             'Descripcion' => 'nullable|string',
+            'Precio' => 'required|numeric',
+            'estado' => 'required|boolean',
             'imagen' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -50,20 +51,22 @@ class ProductoController extends Controller
         }
 
         Producto::create($data);
+
         return redirect()->route('productos.index')->with('success', 'Producto creado correctamente');
     }
-
+    
     public function edit(Producto $producto)
     {
         return view('productos.create', compact('producto'));
     }
 
-    public function update(Request $request, Producto $producto)
+   public function update(Request $request, Producto $producto)
     {
-         $data = $request->validate([
+        $data = $request->validate([
             'Nombre' => 'required|string|max:255',
-            'Precio' => 'required|numeric',
             'Descripcion' => 'nullable|string',
+            'Precio' => 'required|numeric',
+            'estado' => 'required|boolean',
             'imagen' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -73,8 +76,7 @@ class ProductoController extends Controller
 
         $producto->update($data);
 
-        return redirect()->route('productos.index')
-            ->with('success', 'Producto modificado correctamente');
+        return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente');
     }
 
     public function destroy(Producto $producto)

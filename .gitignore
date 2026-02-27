@@ -22,3 +22,10 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+# Evitar subir imágenes de pruebas
+/public/uploads
+
+# Evitar subir archivos de cache de Laravel
+/bootstrap/cache/*
+/storage/framework/*
+/storage/logs/*

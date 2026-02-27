@@ -1,7 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+//crea automáticamente las rutas para listar,
+//  crear, editar, actualizar y eliminar productos.
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\ProductoController;
+
+Route::get('/', [ProductoController::class, 'catalogo'])->name('catalogo');
+Route::resource('productos', ProductoController::class);
+

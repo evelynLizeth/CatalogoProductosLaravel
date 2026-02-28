@@ -8,6 +8,21 @@
         <div style="width:100px"></div> <!-- espacio para centrar el título -->
     </div>
 
+    <!-- Mensajes -->
+    @if(session('success'))
+        <div id="alert-success" class="alert alert-success d-flex justify-content-between align-items-center">
+            <span>{{ session('success') }}</span>
+        </div>
+
+        <script>
+            setTimeout(() => {
+                const alert = document.getElementById('alert-success');
+                if (alert) {
+                    alert.style.display = 'none';
+                }
+            }, 2000); // 2 segundos
+        </script>
+    @endif
     <!-- Formulario en tarjeta -->
     <div class="card mb-4">
         <div class="card-header bg-success text-white">
@@ -47,10 +62,17 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Imagen</label>
-                        <input type="file" name="imagen" class="form-control">
+                        <div class="d-flex align-items-center">
+                            <input type="file" name="imagen" class="form-control">
+
+                            @if(isset($producto) && $producto->imagen)
+                                <span class="ms-2 text-success">
+                                    Archivo seleccionado: {{ basename($producto->imagen) }}
+                                </span>
+                            @endif
+                        </div>
                     </div>
                 </div>
-
                 <button type="submit" class="btn btn-success w-100">
                     {{ isset($producto) ? 'Actualizar' : 'Guardar' }}
                 </button>
@@ -88,7 +110,7 @@
                                 <form action="{{ route('productos.destroy', $producto) }}" method="POST" style="display:inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro?')">Eliminar</button>
+                                    <button class="btn btn-danger btn-sm" onclick="return confirm('¿Desea eliminar el producto?')">Eliminar</button>
                                 </form>
                             </td>
                         </tr>

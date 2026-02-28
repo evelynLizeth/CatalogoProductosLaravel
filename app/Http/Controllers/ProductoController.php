@@ -47,7 +47,9 @@ class ProductoController extends Controller
         ]);
 
         if ($request->hasFile('imagen')) {
-            $data['imagen'] = $request->file('imagen')->store('imagenes', 'public');
+            $nombreArchivo = time() . '.' . $request->imagen->extension();
+            $request->imagen->move(public_path('uploads'), $nombreArchivo);
+            $data['imagen'] = $nombreArchivo; // Guardamos solo el nombre
         }
 
         Producto::create($data);
@@ -55,9 +57,10 @@ class ProductoController extends Controller
         return redirect()->route('productos.index')->with('success', 'Producto creado correctamente');
     }
 
-    public function edit(Producto $producto)
+   public function edit(Producto $producto)
     {
-        return view('productos.edit', compact('producto'));
+        $productos = Producto::all();
+        return view('productos.index', compact('producto', 'productos'));
     }
 
    public function update(Request $request, Producto $producto)
@@ -70,8 +73,10 @@ class ProductoController extends Controller
             'imagen' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        if ($request->hasFile('imagen')) {
-            $data['imagen'] = $request->file('imagen')->store('imagenes', 'public');
+       if ($request->hasFile('imagen')) {
+            $nombreArchivo = time() . '.' . $request->imagen->extension();
+            $request->imagen->move(public_path('uploads'), $nombreArchivo);
+            $data['imagen'] = $nombreArchivo; // Guardamos solo el nombre
         }
 
         $producto->update($data);

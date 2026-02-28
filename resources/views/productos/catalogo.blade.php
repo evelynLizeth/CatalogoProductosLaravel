@@ -17,13 +17,14 @@
     <div class="row">
         @foreach($productos as $producto)
             <div class="col-md-3 mb-4">
-                <div class="card h-100 text-center bg-white text-dark shadow-sm border-0 rounded-3">
-                    <div class="overflow-hidden">
-                        <img src="{{ asset($producto->imagen) }}" class="card-img-top zoom" alt="{{ $producto->Nombre }}">
-                    </div>
+                <div class="card h-100">
+                    <img src="{{ asset('uploads/' . $producto->imagen) }}" 
+                        alt="{{ $producto->Nombre }}" 
+                        class="card-img-top"
+                        style="max-height:200px; object-fit:cover;">
                     <div class="card-body">
                         <h5 class="card-title">{{ $producto->Nombre }}</h5>
-                        <p class="card-text">${{ number_format($producto->Precio,2) }}</p>
+                        <p class="card-text">${{ number_format($producto->Precio, 2) }}</p>
                     </div>
                 </div>
             </div>

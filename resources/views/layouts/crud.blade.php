@@ -25,6 +25,13 @@
             background-color: #007bff;
             color: #fff;
         }
+       .card-img-top {
+            transition: transform 0.3s ease; /* animación suave */
+        }
+
+        .card:hover .card-img-top {
+            transform: scale(1.1); /* zoom al pasar el mouse */
+        }
     </style>
 </head>
 <body>

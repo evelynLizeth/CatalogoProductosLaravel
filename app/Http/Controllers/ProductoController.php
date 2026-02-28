@@ -54,10 +54,10 @@ class ProductoController extends Controller
 
         return redirect()->route('productos.index')->with('success', 'Producto creado correctamente');
     }
-    
+
     public function edit(Producto $producto)
     {
-        return view('productos.create', compact('producto'));
+        return view('productos.edit', compact('producto'));
     }
 
    public function update(Request $request, Producto $producto)

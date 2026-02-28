@@ -5,9 +5,7 @@
     <h1 class="text-center mb-4">Catálogo de productos</h1>
 
     <div class="d-flex justify-content-between mb-3">
-        <a href="{{ route('productos.index') }}" class="btn btn-primary">
-            Configuración de productos
-        </a>
+        <a href="{{ route('productos.index') }}" class="btn btn-primary">Configuración de productos</a>
 
         <form method="GET" action="{{ url('/') }}" class="d-flex">
             <input type="number" name="min" value="{{ $min }}" class="form-control me-2" placeholder="Precio mínimo">

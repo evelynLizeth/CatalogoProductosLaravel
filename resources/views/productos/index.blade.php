@@ -14,7 +14,7 @@
             <h5 class="mb-0">{{ isset($producto) ? 'Editar producto' : 'Agregar nuevo producto' }}</h5>
         </div>
         <div class="card-body">
-            <form action="{{ isset($producto) ? route('productos.update', $producto) : route('productos.store') }}" method="POST" enctype="multipart/form-data">
+           <form action="{{ isset($producto) ? route('productos.update', $producto->id) : route('productos.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if(isset($producto))
                     @method('PUT')
@@ -40,9 +40,9 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label class="form-label">Estado</label>
-                        <select name="Estado" class="form-select">
-                            <option value="Activo" {{ (isset($producto) && $producto->Estado == 'Activo') ? 'selected' : '' }}>Activo</option>
-                            <option value="Inactivo" {{ (isset($producto) && $producto->Estado == 'Inactivo') ? 'selected' : '' }}>Inactivo</option>
+                        <select name="estado" class="form-select">
+                            <option value="1" {{ (isset($producto) && $producto->estado == 1) ? 'selected' : '' }}>Activo</option>
+                            <option value="0" {{ (isset($producto) && $producto->estado == 0) ? 'selected' : '' }}>Inactivo</option>
                         </select>
                     </div>
                     <div class="col-md-6">

@@ -12,7 +12,7 @@
             <h5 class="mb-0">{{ isset($producto) ? 'Editar producto' : 'Agregar nuevo producto' }}</h5>
         </div>
         <div class="card-body">
-            <form action="{{ isset($producto) ? route('productos.update', $producto) : route('productos.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('productos.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @if(isset($producto))
                     @method('PUT')
